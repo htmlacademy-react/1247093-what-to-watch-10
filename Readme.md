@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть»
 
 * Студент: [Serafima Mokrousova](https://up.htmlacademy.ru/react/10/user/1247093).
-* Наставник: `Неизвестно`.
+* Наставник: [Polina Shneider](https://htmlacademy.ru/profile/id1178327).
 
 ---
 
