@@ -1,11 +1,13 @@
-import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
+import Logo from '../../components/logo/logo';
 
 function Login(): JSX.Element {
   return (
     <div className="user-page">
-      <Header />
-
+      <header className="page-header user-page__head">
+        <Logo />
+        <h1 className="page-title user-page__title">Sign in</h1>
+      </header>
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form">
           <div className="sign-in__fields">
