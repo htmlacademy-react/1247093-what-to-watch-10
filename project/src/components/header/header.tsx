@@ -1,4 +1,5 @@
 import Logo from '../logo/logo';
+import { Link } from 'react-router-dom';
 
 function Header(): JSX.Element {
   return (
@@ -17,7 +18,9 @@ function Header(): JSX.Element {
           </div>
         </li>
         <li className="user-block__item">
-          <a className="user-block__link">Sign out</a>
+          <Link className="user-block__link" to="#">
+            Sign out
+          </Link>
         </li>
       </ul>
     </header>

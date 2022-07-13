@@ -78,6 +78,8 @@ function MainScreen(props:MainScreenProps): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <ul className="catalog__genres-list">
+            {/* Эту часть все равно буду генерировать, поэтому не буду менять пока заглушки */}
+
             <li className="catalog__genres-item catalog__genres-item--active">
               <a href="#" className="catalog__genres-link">
                 All genres
