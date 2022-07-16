@@ -1,7 +1,8 @@
 
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import FilmCard from '../../components/film-card/film-card';
+// import FilmCard from '../../components/film-card/film-card';
+import FilmList from '../../components/film-list/film-list';
 import { FilmStructure } from '../../types/films';
 
 type MainScreenProps = {
@@ -130,11 +131,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {filmsStructure.map((film: FilmStructure) => (
-              <FilmCard filmCard = {film} key={film.id + 1} />
-            ))}
-          </div>
+          <FilmList filmsStructure = {filmsStructure}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">

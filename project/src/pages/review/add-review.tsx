@@ -2,23 +2,26 @@
 import Logo from '../../components/logo/logo';
 import { FilmStructure } from '../../types/films';
 import {useState, ChangeEvent} from 'react';
+import { useParams } from 'react-router-dom';
 
 
 type AddReviewScreenProps = {
-  filmReview: FilmStructure;
+  filmsList: FilmStructure[];
 };
 
-function AddReview({ filmReview }: AddReviewScreenProps): JSX.Element {
+function AddReview({ filmsList }: AddReviewScreenProps): JSX.Element {
 
 
   const [userReview, setUserReview] = useState('Review text');
-  console.log(userReview);
+  const params = useParams();
+  const filmExample:any = filmsList.find((item) => item.id === Number(params.id));
+
 
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={filmReview.previewImage} alt={filmReview.name} />
+          <img src={filmExample.previewImage} alt={filmExample.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -29,7 +32,7 @@ function AddReview({ filmReview }: AddReviewScreenProps): JSX.Element {
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
                 <a href="film-page.html" className="breadcrumbs__link">
-                  {filmReview.name}
+                  {filmExample.name}
                 </a>
               </li>
               <li className="breadcrumbs__item">
@@ -57,8 +60,8 @@ function AddReview({ filmReview }: AddReviewScreenProps): JSX.Element {
 
         <div className="film-card__poster film-card__poster--small">
           <img
-            src={filmReview.posterImage}
-            alt={` ${filmReview.name} poster`}
+            src={filmExample.posterImage}
+            alt={` ${filmExample.name} poster`}
             width="218"
             height="327"
           />

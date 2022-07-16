@@ -1,15 +1,14 @@
-/* eslint-disable quotes */
-import { Route, BrowserRouter, Routes } from "react-router-dom";
-import { AppRoute, AuthorizationStatus } from "../../const";
-import MainScreen from "../../pages/main/main";
-import Film from "../../pages/film/film";
-import MyList from "../../pages/my-list/my-list";
-import Login from "../../pages/sing-in/login";
-import AddReview from "../../pages/review/add-review";
-import Player from "../../pages/player/player";
-import NotFoundScreen from "../../pages/not-found-screen/not-found-screen";
-import PrivateRoute from "../private-route/private-route";
-import { FilmStructure } from "../../types/films";
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import MainScreen from '../../pages/main/main';
+import Film from '../../pages/film/film';
+import MyList from '../../pages/my-list/my-list';
+import Login from '../../pages/sing-in/login';
+import AddReview from '../../pages/review/add-review';
+import Player from '../../pages/player/player';
+import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import PrivateRoute from '../private-route/private-route';
+import { FilmStructure } from '../../types/films';
 
 type AppScreenProps = {
   filmsStructure: FilmStructure[];
@@ -21,19 +20,21 @@ function App({ filmsStructure, filmCard }: AppScreenProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route
-          path={AppRoute.Root}
+          path={AppRoute.Main}
           element={
             <MainScreen filmsStructure={filmsStructure} filmCard={filmCard} />
           }
         />
-        <Route path={AppRoute.Film} element={<Film filmCard={filmCard}/>} />
+        <Route path={AppRoute.Film} element={<Film filmsList={filmsStructure} />} />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReview filmReview={filmCard} />}
+          element={<AddReview filmsList={filmsStructure} />}
         />
         <Route path={AppRoute.Login} element={<Login />} />
-        <Route path={AppRoute.Player} element={<Player filmCard={filmCard}/>} />
-
+        <Route
+          path={AppRoute.Player}
+          element={<Player filmsList={filmsStructure} />}
+        />
         <Route
           path={AppRoute.MyList}
           element={

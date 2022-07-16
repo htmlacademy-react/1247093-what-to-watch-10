@@ -1,18 +1,25 @@
+/* eslint-disable no-console */
 import Header from '../../components/header/header';
 import { FilmStructure } from '../../types/films';
+import { useParams } from 'react-router-dom';
 
 type FilmProps = {
-  filmCard: FilmStructure;
+  filmsList: FilmStructure[];
 };
 
 function Film(props: FilmProps): JSX.Element {
-  const { filmCard } = props;
+  const { filmsList } = props;
+
+  //мне кажется это не идеальным решением. Раньше можно было сделать это через метод render в Route.
+  // Сейчас приходится определять через any но так они дают в примере https://codesandbox.io/s/6-1-7-v2-nd2ij9?file=/src/tool.js
+  const params = useParams();
+  const filmExample:any = filmsList.find((item) => item.id === Number(params.id));
 
   return (
     <section className="film-card film-card--full">
       <div className="film-card__hero">
         <div className="film-card__bg">
-          <img src={filmCard.previewImage} alt={filmCard.name} />
+          <img src={filmExample.previewImage} alt={filmExample.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -21,10 +28,10 @@ function Film(props: FilmProps): JSX.Element {
 
         <div className="film-card__wrap">
           <div className="film-card__desc">
-            <h2 className="film-card__title">{filmCard.name}</h2>
+            <h2 className="film-card__title">{filmExample.name}</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">{filmCard.genre}</span>
-              <span className="film-card__year">{filmCard.released}</span>
+              <span className="film-card__genre">{filmExample.genre}</span>
+              <span className="film-card__year">{filmExample.released}</span>
             </p>
 
             <div className="film-card__buttons">
@@ -53,8 +60,8 @@ function Film(props: FilmProps): JSX.Element {
         <div className="film-card__info">
           <div className="film-card__poster film-card__poster--big">
             <img
-              src={filmCard.posterImage}
-              alt={` ${filmCard.name} poster`}
+              src={filmExample.posterImage}
+              alt={` ${filmExample.name} poster`}
               width="218"
               height="327"
             />
@@ -82,25 +89,25 @@ function Film(props: FilmProps): JSX.Element {
             </nav>
 
             <div className="film-rating">
-              <div className="film-rating__score">{filmCard.rating}</div>
+              <div className="film-rating__score">{filmExample.rating}</div>
               <p className="film-rating__meta">
-                <span className="film-rating__level">{filmCard.mark}</span>
+                <span className="film-rating__level">{filmExample.mark}</span>
                 <span className="film-rating__count">
-                  {filmCard.scoresCount} ratings
+                  {filmExample.scoresCount} ratings
                 </span>
               </p>
             </div>
 
             <div className="film-card__text">
-              {filmCard.description}
+              {filmExample.description}
 
               <p className="film-card__director">
-                <strong>Director: {filmCard.director}</strong>
+                <strong>Director: {filmExample.director}</strong>
               </p>
 
               <p className="film-card__starring">
                 <strong>
-                  {filmCard.starring}
+                  {filmExample.starring}
                   and other
                 </strong>
               </p>
