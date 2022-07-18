@@ -13,7 +13,9 @@ function Film(props: FilmProps): JSX.Element {
   //мне кажется это не идеальным решением. Раньше можно было сделать это через метод render в Route.
   // Сейчас приходится определять через any но так они дают в примере https://codesandbox.io/s/6-1-7-v2-nd2ij9?file=/src/tool.js
   const params = useParams();
-  const filmExample:any = filmsList.find((item) => item.id === Number(params.id));
+  const filmExample: any = filmsList.find(
+    (item) => item.id === Number(params.id)
+  );
 
   return (
     <section className="film-card film-card--full">
