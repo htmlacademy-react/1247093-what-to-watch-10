@@ -1,14 +1,27 @@
+/* eslint-disable no-console */
 import Header from '../../components/header/header';
+import { FilmStructure } from '../../types/films';
+import { useParams } from 'react-router-dom';
 
-function Film(): JSX.Element {
+type FilmProps = {
+  filmsList: FilmStructure[];
+};
+
+function Film(props: FilmProps): JSX.Element {
+  const { filmsList } = props;
+
+  //мне кажется это не идеальным решением. Раньше можно было сделать это через метод render в Route.
+  // Сейчас приходится определять через any но так они дают в примере https://codesandbox.io/s/6-1-7-v2-nd2ij9?file=/src/tool.js
+  const params = useParams();
+  const filmExample: any = filmsList.find(
+    (item) => item.id === Number(params.id)
+  );
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__hero">
         <div className="film-card__bg">
-          <img
-            src="img/bg-the-grand-budapest-hotel.jpg"
-            alt="The Grand Budapest Hotel"
-          />
+          <img src={filmExample.previewImage} alt={filmExample.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -17,10 +30,10 @@ function Film(): JSX.Element {
 
         <div className="film-card__wrap">
           <div className="film-card__desc">
-            <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+            <h2 className="film-card__title">{filmExample.name}</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">Drama</span>
-              <span className="film-card__year">2014</span>
+              <span className="film-card__genre">{filmExample.genre}</span>
+              <span className="film-card__year">{filmExample.released}</span>
             </p>
 
             <div className="film-card__buttons">
@@ -49,8 +62,8 @@ function Film(): JSX.Element {
         <div className="film-card__info">
           <div className="film-card__poster film-card__poster--big">
             <img
-              src="img/the-grand-budapest-hotel-poster.jpg"
-              alt="The Grand Budapest Hotel poster"
+              src={filmExample.posterImage}
+              alt={` ${filmExample.name} poster`}
               width="218"
               height="327"
             />
@@ -78,35 +91,25 @@ function Film(): JSX.Element {
             </nav>
 
             <div className="film-rating">
-              <div className="film-rating__score">8,9</div>
+              <div className="film-rating__score">{filmExample.rating}</div>
               <p className="film-rating__meta">
-                <span className="film-rating__level">Very good</span>
-                <span className="film-rating__count">240 ratings</span>
+                <span className="film-rating__level">{filmExample.mark}</span>
+                <span className="film-rating__count">
+                  {filmExample.scoresCount} ratings
+                </span>
               </p>
             </div>
 
             <div className="film-card__text">
-              <p>
-                In the 1930s, the Grand Budapest Hotel is a popular European ski
-                resort, presided over by concierge Gustave H. (Ralph Fiennes).
-                Zero, a junior lobby boy, becomes Gustaves friend and protege.
-              </p>
-
-              <p>
-                Gustave prides himself on providing first-className service to
-                the hotels guests, including satisfying the sexual needs of the
-                many elderly women who stay there. When one of Gustaves lovers
-                dies mysteriously, Gustave finds himself the recipient of a
-                priceless painting and the chief suspect in her murder.
-              </p>
+              {filmExample.description}
 
               <p className="film-card__director">
-                <strong>Director: Wes Anderson</strong>
+                <strong>Director: {filmExample.director}</strong>
               </p>
 
               <p className="film-card__starring">
                 <strong>
-                  Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe
+                  {filmExample.starring}
                   and other
                 </strong>
               </p>

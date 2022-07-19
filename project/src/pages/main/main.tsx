@@ -1,20 +1,19 @@
-/* eslint-disable no-console */
 
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import FilmCard from '../../components/film-card/film-card';
+// import FilmCard from '../../components/film-card/film-card';
+import FilmList from '../../components/film-list/film-list';
+import { FilmStructure } from '../../types/films';
 
 type MainScreenProps = {
-  filmsCount: number[];
-  filmName: string;
-  filmGenre: string;
-  filmDate: number;
-}
+  filmsStructure: FilmStructure[];
+  filmCard: FilmStructure;
+};
 
-function MainScreen(props:MainScreenProps): JSX.Element {
-  console.log(props.filmName);
+function MainScreen(props: MainScreenProps): JSX.Element {
 
-  const { filmsCount , filmName , filmGenre, filmDate } = props;
+  const { filmsStructure, filmCard } = props;
+
 
   return (
     <>
@@ -33,18 +32,18 @@ function MainScreen(props:MainScreenProps): JSX.Element {
           <div className="film-card__info">
             <div className="film-card__poster">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
+                src={filmCard.posterImage}
+                alt={` ${filmCard.name } poster`}
                 width="218"
                 height="327"
               />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmName}</h2>
+              <h2 className="film-card__title">{filmCard.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{filmGenre}</span>
-                <span className="film-card__year">{filmDate}</span>
+                <span className="film-card__genre">{filmCard.genre}</span>
+                <span className="film-card__year">{filmCard.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -132,12 +131,7 @@ function MainScreen(props:MainScreenProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {filmsCount.map((i: number) => (
-              <FilmCard key={i + 1} />
-            ))}
-
-          </div>
+          <FilmList filmsStructure = {filmsStructure}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">

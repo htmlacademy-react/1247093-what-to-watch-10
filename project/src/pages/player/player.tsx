@@ -1,7 +1,18 @@
-function Player(): JSX.Element {
+import { FilmStructure } from '../../types/films';
+import { useParams } from 'react-router-dom';
+
+type PlayerProps = {
+  filmsList: FilmStructure[];
+};
+
+function Player(props:PlayerProps): JSX.Element {
+  const { filmsList } = props;
+  const params = useParams();
+  const filmExample:any = filmsList.find((item) => item.id === Number(params.id));
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src="#" className="player__video" poster={filmExample.previewImage}></video>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -11,7 +22,7 @@ function Player(): JSX.Element {
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{ left: '30%' }}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{filmExample.runTime}</div>
         </div>
 
         <div className="player__controls-row">
