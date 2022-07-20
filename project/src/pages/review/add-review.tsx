@@ -15,9 +15,9 @@ function AddReview({ filmsList }: AddReviewScreenProps): JSX.Element {
   const [userRating, setRating] = useState(0);
 
   const params = useParams();
-  const filmExample: any = filmsList.find(
+  const filmExample = filmsList.find(
     (item) => item.id === Number(params.id)
-  );
+  ) as FilmStructure;
 
   return (
     <section className="film-card film-card--full">
@@ -104,8 +104,8 @@ function AddReview({ filmsList }: AddReviewScreenProps): JSX.Element {
                 const value = target.value;
                 setUserReview(value);
               }}
-              // eslint-disable-next-line react/jsx-closing-tag-location
-            ></textarea>
+            >
+            </textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit">
                 Post
