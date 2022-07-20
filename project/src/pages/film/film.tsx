@@ -1,21 +1,19 @@
 /* eslint-disable no-console */
 import Header from '../../components/header/header';
 import { FilmStructure } from '../../types/films';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 type FilmProps = {
   filmsList: FilmStructure[];
 };
 
 function Film(props: FilmProps): JSX.Element {
+  const navigate = useNavigate();
   const { filmsList } = props;
-
-  //мне кажется это не идеальным решением. Раньше можно было сделать это через метод render в Route.
-  // Сейчас приходится определять через any но так они дают в примере https://codesandbox.io/s/6-1-7-v2-nd2ij9?file=/src/tool.js
   const params = useParams();
-  const filmExample: any = filmsList.find(
+  const filmExample = filmsList.find(
     (item) => item.id === Number(params.id)
-  );
+  ) as FilmStructure;
 
   return (
     <section className="film-card film-card--full">
@@ -37,7 +35,11 @@ function Film(props: FilmProps): JSX.Element {
             </p>
 
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
+              <button
+                className="btn btn--play film-card__button"
+                type="button"
+                onClick={() => navigate(`/player/${filmExample.id}`)}
+              >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
