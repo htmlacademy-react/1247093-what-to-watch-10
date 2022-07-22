@@ -22,7 +22,7 @@ function App({ filmsStructure, filmCard }: AppScreenProps): JSX.Element {
         <Route
           path={AppRoute.Main}
           element={
-            <MainScreen filmsStructure={filmsStructure} filmCard={filmCard} />
+            <MainScreen filmsList={filmsStructure} filmCard={filmCard} />
           }
         />
         <Route path={AppRoute.Film} element={<Film filmsList={filmsStructure} />} />
