@@ -5,13 +5,17 @@ import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import { FilmStructure } from '../../types/films';
 
+import { useAppSelector } from '../../hooks';
+
 type MainScreenProps = {
-  filmsList: FilmStructure[];
   filmCard: FilmStructure;
 };
 
 function MainScreen(props: MainScreenProps): JSX.Element {
-  const { filmsList, filmCard } = props;
+  const { filmCard } = props;
+  const filmsFromState = useAppSelector((state) => state.filmListFromState);
+  const genreListFromState = useAppSelector((state) => state.allFilmsList);
+
 
   return (
     <>
@@ -74,9 +78,9 @@ function MainScreen(props: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList filmsList={filmsList}/>
+          <GenreList filmsList={genreListFromState}/>
 
-          <FilmList filmsStructure={filmsList} />
+          <FilmList filmsStructure={filmsFromState} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">

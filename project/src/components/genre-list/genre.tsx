@@ -9,7 +9,6 @@ type GenreProp = {
 function Genre(props: GenreProp): JSX.Element {
   const { filmGenre } = props;
   const genre = useAppSelector((state) => state.genreFromState);
-  console.log(genre);
 
   const dispatch = useAppDispatch();
 
