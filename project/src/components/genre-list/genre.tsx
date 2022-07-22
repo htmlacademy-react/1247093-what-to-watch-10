@@ -28,5 +28,4 @@ function Genre(props: GenreProp): JSX.Element {
     </li>
   );
 }
-
 export default Genre;
