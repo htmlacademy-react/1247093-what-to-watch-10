@@ -2,16 +2,17 @@ import FilmCard from '../../components/film-card/film-card';
 import { FilmStructure } from '../../types/films';
 
 type FilmListScreenProps = {
-  filmsStructure: FilmStructure[];
+  filmsFromState: FilmStructure[];
+  MaxFilms: number;
+  MinFilms: number;
 };
 
 function FilmList(props: FilmListScreenProps): JSX.Element {
-  const { filmsStructure } = props;
-
+  const { filmsFromState, MinFilms, MaxFilms } = props;
 
   return (
     <div className="catalog__films-list">
-      {filmsStructure.map((film: FilmStructure) => (
+      {filmsFromState.slice(MinFilms, MaxFilms).map((film: FilmStructure) => (
         <FilmCard filmCard={film} key={film.id + 1} />
       ))}
     </div>

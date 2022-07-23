@@ -3,19 +3,23 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
-import { FilmStructure } from '../../types/films';
+import ShowMoreButton from '../../components/show-more/show-more';
+import { useAppSelector} from '../../hooks';
+import { useState } from 'react';
 
-import { useAppSelector } from '../../hooks';
-
-type MainScreenProps = {
-  filmCard: FilmStructure;
-};
-
-function MainScreen(props: MainScreenProps): JSX.Element {
-  const { filmCard } = props;
+function MainScreen(): JSX.Element {
   const filmsFromState = useAppSelector((state) => state.filmListFromState);
   const genreListFromState = useAppSelector((state) => state.allFilmsList);
+  const filmCard = useAppSelector((state) => state.fiimCard);
+  const ButtonConditionFromState = useAppSelector((state) => state.LoadMoreFilms); // true
+  const MaxFilmsLength = useAppSelector((state) => state.MaxFilms); // 4
+  const MinFilmsLength = useAppSelector((state) => state.MinFilms); // 0
 
+
+  const [isVisibleFilmButton, setVisibleFilmButton] = useState(ButtonConditionFromState);
+  if (isVisibleFilmButton !== ButtonConditionFromState) {
+    setVisibleFilmButton((prevState) => !prevState);
+  }
 
   return (
     <>
@@ -78,15 +82,10 @@ function MainScreen(props: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList filmsList={genreListFromState}/>
+          <GenreList filmsList={genreListFromState} />
 
-          <FilmList filmsStructure={filmsFromState} />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">
-              Show more
-            </button>
-          </div>
+          <FilmList filmsFromState={filmsFromState} MaxFilms={MaxFilmsLength} MinFilms={MinFilmsLength} />
+          {isVisibleFilmButton && <ShowMoreButton />}
         </section>
         <Footer />
       </div>

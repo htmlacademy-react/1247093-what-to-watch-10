@@ -5,12 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 import FilmCardLittle from '../film-card/film-card-little';
+import { useAppDispatch } from '../../hooks';
+import { resetFilmsCount } from '../../store/actions';
+// всегда-ли дергать этот метод, или как-то можно обобщить?
+// При переходе с главной страницы на другие страницы приложения и
+// обратно счётчик показанных фильмов сбрасывается и отсчёт начинается заново.
 
 type FilmCardProps = {
   filmCard: FilmStructure;
 };
 
 function FilmCard(props: FilmCardProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { filmCard } = props;
@@ -29,7 +35,7 @@ function FilmCard(props: FilmCardProps): JSX.Element {
       onMouseLeave={() => {
         setVisibleFilmInfo(!isVisibleFilmInfo);
       }}
-      onClick={() => navigate(`/films/${filmCard.id}`)}
+      onClick={() => {navigate(`/films/${filmCard.id}`); dispatch(resetFilmsCount());}}
     >
       <div className="small-film-card__image">
         {isVisibleFilmInfo ? (

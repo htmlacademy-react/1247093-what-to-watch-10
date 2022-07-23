@@ -8,21 +8,18 @@ import AddReview from '../../pages/review/add-review';
 import Player from '../../pages/player/player';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import { FilmStructure } from '../../types/films';
+import { useAppSelector } from '../../hooks';
 
-type AppScreenProps = {
-  filmsStructure: FilmStructure[];
-  filmCard: FilmStructure;
-};
 
-function App({ filmsStructure, filmCard }: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
+  const filmsStructure = useAppSelector((state) => state.allFilmsList);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
           element={
-            <MainScreen filmCard={filmCard} />
+            <MainScreen/>
           }
         />
         <Route path={AppRoute.Film} element={<Film filmsList={filmsStructure} />} />
