@@ -11,7 +11,6 @@ import { FilmsCountForView } from '../../const';
 type FilmProps = {
   filmsList: FilmStructure[];
 };
-
 function Film(props: FilmProps): JSX.Element {
   const navigate = useNavigate();
   const { filmsList } = props;
