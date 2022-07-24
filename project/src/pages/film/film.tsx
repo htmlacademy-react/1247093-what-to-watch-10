@@ -20,7 +20,8 @@ function Film(props: FilmProps): JSX.Element {
   ) as FilmStructure;
 
   const filmListFromState = useAppSelector((state) => state.filmListFromState);
-  //потом доделаю чтобы не появлялся в похожих карточках сама карточка, пока это просто для теста, ибо моков мало
+  //потом доделаю чтобы не появлялся в похожих карточках сама карточка,
+  // пока это просто для теста, ибо моков мало
   const similarfilmArray: FilmStructure[] = filmListFromState.filter(
     (item) => item.genre === filmExample.genre
   );
