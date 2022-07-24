@@ -9,5 +9,6 @@ export const loadMoreFilms = createAction('button/loadmore', (condition:boolean)
 }));
 export const changeFilmsCount = createAction('film/changeCount');
 export const resetFilmsCount = createAction('film/resetCount');
-
-
+export const changeTab = createAction('tab/changeTab', (value:string) => ({
+  payload: value,
+}));

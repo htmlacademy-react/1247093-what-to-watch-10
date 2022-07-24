@@ -2,17 +2,24 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeFilmsCount, loadMoreFilms } from '../../store/actions';
 import { ButtonCondition } from '../../const';
+import { useEffect } from 'react';
 
 function ShowMoreButton(): JSX.Element {
   const dispatch = useAppDispatch();
   const filmsFromState = useAppSelector((state) => state.filmListFromState);
 
-  const MaxFilmsLength = useAppSelector((state) => state.MaxFilms); // 4
-  const MinFilmsLength = useAppSelector((state) => state.MinFilms); // 0
+  const incFilmsLength = useAppSelector((state) => state.MaxFilms);
+  const minFilmsLength = useAppSelector((state) => state.MinFilms);
 
-  if (filmsFromState.length > MinFilmsLength && MaxFilmsLength >= filmsFromState.length) {
-    dispatch(loadMoreFilms(ButtonCondition.Blocked));
-  }
+
+  useEffect(() => {
+    if (
+      filmsFromState.length > minFilmsLength &&
+      incFilmsLength >= filmsFromState.length
+    ) {
+      dispatch(loadMoreFilms(ButtonCondition.Blocked));
+    }
+  });
 
   return (
     <div className="catalog__more">

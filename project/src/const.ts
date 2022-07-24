@@ -24,4 +24,11 @@ export enum FilmsCountForView {
   Min = 0,
   Max = 4,
   Step = 4,
+  Similar = 4,
+}
+
+export enum TabsSections {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews',
 }

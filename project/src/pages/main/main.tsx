@@ -11,13 +11,13 @@ function MainScreen(): JSX.Element {
   const filmsFromState = useAppSelector((state) => state.filmListFromState);
   const genreListFromState = useAppSelector((state) => state.allFilmsList);
   const filmCard = useAppSelector((state) => state.fiimCard);
-  const ButtonConditionFromState = useAppSelector((state) => state.LoadMoreFilms); // true
-  const MaxFilmsLength = useAppSelector((state) => state.MaxFilms); // 4
-  const MinFilmsLength = useAppSelector((state) => state.MinFilms); // 0
+  const buttonConditionFromState = useAppSelector((state) => state.LoadMoreFilms);
+  const incFilmsLength = useAppSelector((state) => state.MaxFilms);
+  const minFilmsLength = useAppSelector((state) => state.MinFilms);
 
 
-  const [isVisibleFilmButton, setVisibleFilmButton] = useState(ButtonConditionFromState);
-  if (isVisibleFilmButton !== ButtonConditionFromState) {
+  const [isVisibleFilmButton, setVisibleFilmButton] = useState(buttonConditionFromState);
+  if (isVisibleFilmButton !== buttonConditionFromState) {
     setVisibleFilmButton((prevState) => !prevState);
   }
 
@@ -84,7 +84,7 @@ function MainScreen(): JSX.Element {
 
           <GenreList filmsList={genreListFromState} />
 
-          <FilmList filmsFromState={filmsFromState} MaxFilms={MaxFilmsLength} MinFilms={MinFilmsLength} />
+          <FilmList filmsFromState={filmsFromState} MaxFilms={incFilmsLength} MinFilms={minFilmsLength} />
           {isVisibleFilmButton && <ShowMoreButton />}
         </section>
         <Footer />

@@ -3,10 +3,6 @@ import { FilmStructure } from '../../types/films';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 
-// Академия пишет: - Для перевода времени проигрывания видео в нужный формат разработчик
-// может воспользоваться дополнительным пакетом на своё усмотрение.
-// можно рекомендацию?)
-
 type PlayerProps = {
   filmsList: FilmStructure[];
 };

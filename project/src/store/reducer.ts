@@ -5,8 +5,11 @@ import {
   loadMoreFilms,
   changeFilmsCount,
   resetFilmsCount,
+  changeTab,
 } from './actions';
 import { films } from '../mocks/mocks';
+import { reviews } from '../mocks/reviews';
+
 import { FilmsCountForView, ButtonCondition } from '../const';
 
 const filmCard = films[0];
@@ -15,11 +18,13 @@ const initialState = {
   genreFromState: 'All genres',
   filmListFromState: films,
   allFilmsList: films,
+  allReviewsList: reviews,
   fiimCard: filmCard,
   MaxFilms: FilmsCountForView.Max,
   MinFilms: FilmsCountForView.Min,
   StepFilms: FilmsCountForView.Step,
   LoadMoreFilms: ButtonCondition.Unblocked,
+  tabFromState: 'Overview',
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -37,6 +42,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadMoreFilms, (state, action) => {
       state.LoadMoreFilms = action.payload;
     })
+    .addCase(changeTab, (state, action) => {
+      state.tabFromState = action.payload;
+    })
     .addCase(resetFilmsCount, (state) => {
       state.MaxFilms = FilmsCountForView.Max;
     })
@@ -49,6 +57,8 @@ const reducer = createReducer(initialState, (builder) => {
       state.MaxFilms = FilmsCountForView.Max;
       state.MinFilms = FilmsCountForView.Min;
       state.StepFilms = FilmsCountForView.Step;
+      state.tabFromState = 'Overview';
+      state.allReviewsList = reviews;
     });
 });
 
