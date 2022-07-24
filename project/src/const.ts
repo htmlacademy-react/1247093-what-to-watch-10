@@ -14,3 +14,21 @@ export enum AuthorizationStatus {
 }
 
 export const ratingStars: number[] = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+export const ButtonCondition = {
+  Unblocked: true,
+  Blocked: false,
+};
+
+export enum FilmsCountForView {
+  Min = 0,
+  Max = 4,
+  Step = 4,
+  Similar = 4,
+}
+
+export enum TabsSections {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews',
+}

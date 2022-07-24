@@ -1,6 +1,6 @@
-import { FilmReviews } from '../types/films';
+import { FilmReview } from '../types/films';
 
-export const comments: FilmReviews[] = [
+export const reviews: FilmReview[] = [
   {
     id: 1,
     user: {
@@ -14,6 +14,26 @@ export const comments: FilmReviews[] = [
   },
   {
     id: 2,
+    user: {
+      id: 4,
+      name: 'Masha',
+    },
+    rating: 9,
+    comment: 'Bla-bla',
+    date: '2019-05-08T14:13:56.569Z',
+  },
+  {
+    id: 5,
+    user: {
+      id: 4,
+      name: 'Masha',
+    },
+    rating: 9,
+    comment: 'Bla-bla',
+    date: '2019-05-08T14:13:56.569Z',
+  },
+  {
+    id: 4,
     user: {
       id: 4,
       name: 'Masha',

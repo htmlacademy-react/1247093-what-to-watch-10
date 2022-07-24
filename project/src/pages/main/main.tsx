@@ -1,19 +1,25 @@
-
+/* eslint-disable no-console */
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-// import FilmCard from '../../components/film-card/film-card';
 import FilmList from '../../components/film-list/film-list';
-import { FilmStructure } from '../../types/films';
+import GenreList from '../../components/genre-list/genre-list';
+import ShowMoreButton from '../../components/show-more/show-more';
+import { useAppSelector} from '../../hooks';
+import { useState } from 'react';
 
-type MainScreenProps = {
-  filmsStructure: FilmStructure[];
-  filmCard: FilmStructure;
-};
+function MainScreen(): JSX.Element {
+  const filmsFromState = useAppSelector((state) => state.filmListFromState);
+  const genreListFromState = useAppSelector((state) => state.allFilmsList);
+  const filmCard = useAppSelector((state) => state.fiimCard);
+  const buttonConditionFromState = useAppSelector((state) => state.LoadMoreFilms);
+  const incFilmsLength = useAppSelector((state) => state.MaxFilms);
+  const minFilmsLength = useAppSelector((state) => state.MinFilms);
 
-function MainScreen(props: MainScreenProps): JSX.Element {
 
-  const { filmsStructure, filmCard } = props;
-
+  const [isVisibleFilmButton, setVisibleFilmButton] = useState(buttonConditionFromState);
+  if (isVisibleFilmButton !== buttonConditionFromState) {
+    setVisibleFilmButton((prevState) => !prevState);
+  }
 
   return (
     <>
@@ -33,7 +39,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
             <div className="film-card__poster">
               <img
                 src={filmCard.posterImage}
-                alt={` ${filmCard.name } poster`}
+                alt={` ${filmCard.name} poster`}
                 width="218"
                 height="327"
               />
@@ -76,68 +82,10 @@ function MainScreen(props: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            {/* Эту часть все равно буду генерировать, поэтому не буду менять пока заглушки */}
+          <GenreList filmsList={genreListFromState} />
 
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">
-                All genres
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Comedies
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Crime
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Documentary
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Dramas
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Horror
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Kids & Family
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Romance
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Sci-Fi
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Thrillers
-              </a>
-            </li>
-          </ul>
-
-          <FilmList filmsStructure = {filmsStructure}/>
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">
-              Show more
-            </button>
-          </div>
+          <FilmList filmsFromState={filmsFromState} MaxFilms={incFilmsLength} MinFilms={minFilmsLength} />
+          {isVisibleFilmButton && <ShowMoreButton />}
         </section>
         <Footer />
       </div>

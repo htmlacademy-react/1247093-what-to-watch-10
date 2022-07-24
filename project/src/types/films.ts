@@ -19,7 +19,7 @@ export type FilmStructure = {
   mark: string;
 };
 
-export type FilmReviews = {
+export type FilmReview = {
   id: number;
   user: {
     id: number;
