@@ -10,7 +10,7 @@ import { useState } from 'react';
 function MainScreen(): JSX.Element {
   const filmsFromState = useAppSelector((state) => state.filmListFromState);
   const genreListFromState = useAppSelector((state) => state.allFilmsList);
-  const filmCard = useAppSelector((state) => state.fiimCard);
+  const filmCard = useAppSelector((state) => state.filmCard);
   const buttonConditionFromState = useAppSelector((state) => state.LoadMoreFilms);
   const incFilmsLength = useAppSelector((state) => state.MaxFilms);
   const minFilmsLength = useAppSelector((state) => state.MinFilms);
@@ -26,8 +26,8 @@ function MainScreen(): JSX.Element {
       <section className="film-card">
         <div className="film-card__bg">
           <img
-            src="img/bg-the-grand-budapest-hotel.jpg"
-            alt="The Grand Budapest Hotel"
+            src={filmCard.backgroundImage}
+            alt={filmCard.name}
           />
         </div>
 

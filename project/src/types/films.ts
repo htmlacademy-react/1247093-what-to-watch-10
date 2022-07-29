@@ -29,3 +29,6 @@ export type FilmReview = {
   comment: string;
   date: string;
 };
+
+export type Films = FilmStructure[];
+
