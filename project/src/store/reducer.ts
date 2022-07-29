@@ -15,6 +15,7 @@ import { filmOne } from '../mocks/mocks';
 import { reviews } from '../mocks/reviews';
 import { FilmsCountForView, ButtonCondition, AuthorizationStatus } from '../const';
 import { Films,FilmStructure } from '../types/films';
+// первая часть
 
 const filmCard = filmOne;
 
